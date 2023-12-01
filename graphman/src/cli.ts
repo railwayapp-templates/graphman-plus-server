@@ -33,6 +33,12 @@ const url = Deno.env.get("GRAPHQL_ENDPOINT");
 if (!url) {
   console.error("GRAPHQL_ENDPOINT is not defined.");
   Deno.exit(1);
+};
+
+const fileServerUrl = Deno.env.get("API_URL");
+if (!fileServerUrl) {
+  console.error("API_URL is not defined");
+  Deno.exit(1);
 }
 
 let path = args.out;
@@ -42,7 +48,7 @@ const urlRegexp = /https?:\/\/*/;
 if (!urlRegexp.test(url)) {
   console.error(`${url} is not a valid url`);
   Deno.exit(1);
-}
+};
 
 console.log(`Creating the postman collection for ${url}`);
 
@@ -61,5 +67,5 @@ try {
   Deno.exit(1);
 }
 
-sendToApi(postmanCollection)
+sendToApi(postmanCollection, fileServerUrl)
 console.log(`Collection sent to ${Deno.env.get("API_URL")} to upload`);

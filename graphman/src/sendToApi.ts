@@ -1,4 +1,4 @@
-export async function sendToApi(json: any, apiEndpoint: string = Deno.env.get("API_URL")) {
+export async function sendToApi(json: any, apiEndpoint: string) {
     const response = await fetch(`https://${apiEndpoint}/upload`, {
       method: "POST",
       headers: {
@@ -11,6 +11,5 @@ export async function sendToApi(json: any, apiEndpoint: string = Deno.env.get("A
       throw new Error(`Failed to send data to Flask: ${response.statusText}`);
     }
   
-    const responseData = await response.json();
     return {message: "Success"}
   }
